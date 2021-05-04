@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.geofferyj.jmessangermini.ChatItem" />
+
+        <variable
+            name="userId"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{message.from.equals(userId) ? @drawable/msg_sent : @drawable/msg_received}"
+        android:padding="8dp"
+        android:layout_margin="16dp"
+        tools:background="@drawable/msg_sent">
+
+
+        <TextView
+            android:id="@+id/sender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="@{message.from.equals(userId)}"
+            android:textColor="@color/black"
+            android:text="@{message.from}" />
+
+        <TextView
+            android:id="@+id/msg_sent_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender"
+            android:layout_alignParentEnd="@{message.from.equals(userId)}"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:maxWidth="250dp"
+            android:padding="8dp"
+            android:text="@{message.msg}"
+            tools:text="dfkndkfkd kfkjdkfh dfndknkdmdfkndkfkd kfkjdkfh dfnd" />
+    </RelativeLayout>
+</layout>
