@@ -66,15 +66,16 @@ class ChatFragment : Fragment() {
             val currentTime = getDateString(System.currentTimeMillis())
             val msg = binding.msgBox.editText?.text.toString()
             val chatItem = ChatItem(userId,receiverUserId,msg, currentTime)
-            val msgId = UUID.randomUUID().toString()
-            chatRef.child(chatId).child(msgId).setValue(chatItem)
-                .addOnSuccessListener {
-                    Log.d("MIisisi", "message sent")
-                }
-                .addOnFailureListener {
-                    Log.d("MIisisi", "message failed ${it.message}")
-
-                }
+            val msgId = chatRef.child(chatId).push().key
+            if (msgId != null) {
+                chatRef.child(chatId).child(msgId).setValue(chatItem)
+                    .addOnSuccessListener {
+                        Log.d("MIisisi", "message sent")
+                    }
+                    .addOnFailureListener {
+                        Log.d("MIisisi", "message failed ${it.message}")
+                    }
+            }
 
             binding.msgBox.clearFocus()
             binding.msgBox.editText?.setText("")
